@@ -7,6 +7,7 @@ const perPage = 12;
 
 const fetchImages = ({ query = "", currentPage = 1 }) => {
   const url = `?q=${query}&page=${currentPage}&key=${myApiKey}&image_type=photo&orientation=horizontal&per_page=${perPage}`;
+
   return axios.get(url).then(({ data }) => {
     return data.hits;
   });
