@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 // import axios from "axios";
 import ImageGalleryItem from "../ImageGalleryItem/ImageGalleryItem";
-// import Button from "../Button/Button";
+import Button from "../Button/Button";
 import pixAPI from "../../services/pixabay-service";
 import s from "./ImageGallery.module.css";
 
@@ -45,10 +45,10 @@ class ImageGallery extends Component {
             <ImageGalleryItem key={img.id} imgItem={img} />
           ))}
         </ul>
-        <button type="button" className={s.Button} onClick={this.fetchGallery}>
+        {/* <button type="button" className={s.Button} onClick={this.fetchGallery}>
           Load more
-        </button>
-        {/* <Button onHandleClick={this.fetchGallery} /> */}
+        </button> */}
+        <Button onHandleClick={this.fetchGallery} />
       </>
     );
   }

@@ -1,12 +1,12 @@
-// import React from "react";
-// import s from "./Button.module.css";
+import React from "react";
+import s from "./Button.module.css";
 
-// const Button = ({ onHandleClick }) => {
-//   return (
-//     <button type="button" className={s.Button} onClick={onHandleClick}>
-//       Load more
-//     </button>
-//   );
-// };
+const Button = ({ onHandleClick }) => {
+  return (
+    <button type="button" className={s.Button} onClick={onHandleClick}>
+      Load more
+    </button>
+  );
+};
 
-// export default Button;
+export default Button;
