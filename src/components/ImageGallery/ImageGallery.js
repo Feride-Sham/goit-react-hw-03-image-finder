@@ -6,27 +6,35 @@ import s from "./ImageGallery.module.css";
 
 class ImageGallery extends Component {
   state = {
-    query: "",
-    page: 1,
+    currentPage: 1,
     images: [],
   };
 
-  componentDidMount() {
-    const { query, page } = this.state;
-    pixAPI(query, page).then((response) => {
-      return this.setState({ images: [...response] });
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.query !== this.props.query) {
+      this.fetchGallery();
+    }
+  }
+
+  fetchGallery() {
+    const { query } = this.props;
+    const { currentPage } = this.state;
+    pixAPI({ query }, currentPage).then((response) => {
+      return this.setState((prevState) => ({
+        images: [...response],
+        currentPage: prevState.currentPage + 1,
+      }));
     });
   }
 
   render() {
     const { images } = this.state;
-    console.log(images);
+
     return (
       <ul className={s.ImageGallery}>
         {images.map((img) => (
           <ImageGalleryItem key={img.id} imgItem={img} />
         ))}
-        {/* <ImageGalleryItem /> */}
       </ul>
     );
   }
