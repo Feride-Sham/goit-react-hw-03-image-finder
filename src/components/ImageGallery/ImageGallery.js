@@ -15,6 +15,13 @@ class ImageGallery extends Component {
     if (prevProps.query !== this.props.query) {
       this.fetchGallery();
     }
+
+    if (prevState.currentPage !== this.state.currentPage) {
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: "smooth",
+      });
+    }
   }
 
   fetchGallery = () => {
