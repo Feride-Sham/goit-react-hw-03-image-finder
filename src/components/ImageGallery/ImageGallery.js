@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import ImageGalleryItem from "../ImageGalleryItem/ImageGalleryItem";
 import Loader from "../Loader/Loader";
 import Button from "../Button/Button";
+import Modal from "../Modal/Modal";
 import pixAPI from "../../services/pixabay-service";
 import s from "./ImageGallery.module.css";
 
@@ -12,6 +13,8 @@ class ImageGallery extends Component {
     images: [],
     isLoading: false,
     error: null,
+    showModal: false,
+    largeImgUrl: null,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -50,8 +53,18 @@ class ImageGallery extends Component {
     }, 250);
   };
 
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({ showModal: !showModal }));
+    this.setState({ largeImgUrl: null });
+  };
+
+  handleClickImage = (url) => {
+    this.toggleModal();
+    this.setState({ largeImgUrl: url });
+  };
+
   render() {
-    const { images, isLoading, error } = this.state;
+    const { images, isLoading, error, showModal, largeImgUrl } = this.state;
     const shouldRenderButton = images.length > 0 && !isLoading;
 
     return (
@@ -59,9 +72,19 @@ class ImageGallery extends Component {
         {error && <h1>Sorry</h1>}
         <ul className={s.ImageGallery}>
           {images.map((img) => (
-            <ImageGalleryItem key={img.id} imgItem={img} />
+            <ImageGalleryItem
+              key={img.id}
+              imgItem={img}
+              largeImgUrl={img.largeImageURL}
+              onHandleClick={this.handleClickImage}
+            />
           ))}
         </ul>
+        {showModal && (
+          <Modal>
+            <img src={largeImgUrl} alt="" />
+          </Modal>
+        )}
         {isLoading && <Loader />}
         {shouldRenderButton && <Button onHandleClick={this.fetchGallery} />}
       </>
