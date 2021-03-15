@@ -8,10 +8,12 @@ import "./App.css";
 class App extends Component {
   state = {
     query: "",
+    currentPage: 1,
+    images: [],
   };
 
   onChangeQuery = (query) => {
-    this.setState({ query });
+    this.setState({ query, currentPage: 1, images: [] });
   };
 
   render() {
