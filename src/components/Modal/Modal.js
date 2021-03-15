@@ -1,12 +1,17 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { createPortal } from "react-dom";
 import s from "./Modal.module.css";
 
 const modalRoot = document.querySelector("#modal-root");
 
 export default class Modal extends Component {
+  static propTypes = {
+    onHandleClose: PropTypes.func.isRequired,
+    children: PropTypes.object.isRequired,
+  };
+
   componentDidMount() {
-    // ЗДЕСЬ СЛУШАТЕЛИ
     window.addEventListener("keydown", this.handleKeyDown);
   }
 

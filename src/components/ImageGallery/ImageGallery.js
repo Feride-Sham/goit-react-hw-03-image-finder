@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import axios from "axios";
+import PropTypes from "prop-types";
 import ImageGalleryItem from "../ImageGalleryItem/ImageGalleryItem";
 import Loader from "../Loader/Loader";
 import Button from "../Button/Button";
@@ -8,6 +8,10 @@ import pixAPI from "../../services/pixabay-service";
 import s from "./ImageGallery.module.css";
 
 class ImageGallery extends Component {
+  static propTypes = {
+    query: PropTypes.string.isRequired,
+  };
+
   state = {
     currentPage: 1,
     images: [],
