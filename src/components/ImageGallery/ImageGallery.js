@@ -69,7 +69,7 @@ class ImageGallery extends Component {
 
   render() {
     const { images, isLoading, showModal, largeImgUrl } = this.state;
-    const shouldRenderButton = images.length > 0 && !isLoading;
+    const shouldRenderButton = images.length > 11 && !isLoading;
 
     return (
       <>
